@@ -28,7 +28,7 @@ defmodule Vayne.Debug do
   end
 
   @max_width 40
-  @table_headers [:uniqe_key, :all_counts, :error_counts, :next_time, :metric, :deal, :last_error]
+  @table_headers [:uniqe_key, :all_counts, :error_counts, :next_time, :metric, :export, :last_error]
   def info_tasks, do: info_tasks(match: "")
   def info_tasks(opts) do
     max_width = Keyword.get(opts, :max_width, @max_width)
@@ -88,7 +88,7 @@ defmodule Vayne.Debug do
     |> Map.put(:last_error, last_error_msg)
     |> Map.put(:uniqe_key,  task.uniqe_key)
     |> Map.put(:metric,     task.metric_info[:module])
-    |> Map.put(:deal,       task.deal_info[:module])
+    |> Map.put(:export,     task.export_info[:module])
   end
 
 end

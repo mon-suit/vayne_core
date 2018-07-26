@@ -34,13 +34,13 @@ defmodule Vayne.Task do
           uniqe_key:   binary(),
           interval:    pos_integer(),
           metric_info: Metric.t,
-          deal_info:   Export.t
+          export_info:   Export.t
         }
 
   defstruct uniqe_key:   nil,
             interval:    nil,
             metric_info: %Vayne.Task.Metric{},
-            deal_info:   %Vayne.Task.Export{}
+            export_info:   %Vayne.Task.Export{}
 
   def whereis_task(%{uniqe_key: uniqe_key}), do: whereis_task(uniqe_key)
   def whereis_task(uniqe_key) when is_binary(uniqe_key) do
@@ -75,14 +75,14 @@ defmodule Vayne.Task do
 
   end
 
-  def test_task(task = %Vayne.Task{}, no_deal \\ true) do
+  def test_task(task = %Vayne.Task{}, no_export \\ true) do
     with {:ok, stat}    <- task_init(task),
          {:ok, metrics} <- task_metrics(task, stat)
     do
-      if no_deal do
+      if no_export do
         {:ok, metrics}
       else
-        task_deal(task, metrics)
+        task_export(task, metrics)
       end
     else
       {:error, error} -> {:error, error}
@@ -214,7 +214,7 @@ defmodule Vayne.Task do
   defp task_run(task) do
     with {:ok, stat}    <- task_init(task),
          {:ok, metrics} <- task_metrics(task, stat),
-         :ok            <- task_deal(task, metrics)
+         :ok            <- task_export(task, metrics)
     do
       :ok
     else
@@ -241,7 +241,7 @@ defmodule Vayne.Task do
     ret
   end
 
-  defp task_deal(%{deal_info: %{module: m, params: a}}, metrics), do: apply(m, :run, [a, metrics])
+  defp task_export(%{export_info: %{module: m, params: a}}, metrics), do: apply(m, :run, [a, metrics])
 
   defp task_server_name(uniqe_key), do: {:via, Registry, {Vayne.Task.NameRegistry, uniqe_key}}
 end
