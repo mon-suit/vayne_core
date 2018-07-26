@@ -144,18 +144,9 @@ defmodule Vayne.Task do
     {:noreply, new_stat}
   end
 
-  def handle_info({:swarm, :die}, stat) do
-    {:stop, :shutdown, stat}
-  end
-
   def handle_info(msg, stat) do
     Logger.warn "receive unrecognized msg: #{inspect msg}"
     {:noreply, stat}
-  end
-
-  def handle_call({:swarm, :begin_handoff}, _from, stat = %{task: task}) do
-    Logger.info "task #{task.uniqe_key} should handoff!"
-    {:reply, :restart, stat}
   end
 
   defp yield_async(stat = %{task: task, doing: %{start_time: start_time, count: count}}, result) do
