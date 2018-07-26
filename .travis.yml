@@ -1,0 +1,18 @@
+language: elixir
+
+elixir:
+  - 1.7
+  - 1.6
+
+otp_release:
+  - 21.0
+  - 20.3
+
+cache:
+  directories:
+    - _build
+    - deps
+
+script: 
+  - "epmd -daemon"
+  - "MIX_ENV=test mix coveralls.travis --trace --no-start"
