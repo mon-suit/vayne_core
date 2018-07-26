@@ -7,7 +7,7 @@ defmodule Vayne.Store.FileTest do
         uniqe_key:   "test_task##{:rand.uniform(1000)}",
         interval:    10,
         metric_info: %{module: Vayne.Metric.Port, params: %{"ip" => "127.0.0.1", "port" => 999}},
-        deal_info:   %{module: Vayne.Deal.Console, params: nil}
+        deal_info:   %{module: Vayne.Export.Console, params: nil}
       }
     end)
   end

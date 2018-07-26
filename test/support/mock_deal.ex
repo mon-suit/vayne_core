@@ -1,5 +1,5 @@
-defmodule Vayne.Deal.Mock do
-  @behaviour Vayne.Task.Deal
+defmodule Vayne.Export.Mock do
+  @behaviour Vayne.Task.Export
   require Logger
   def run(%{parent: parent, ref: ref}, metrics) do
     send(parent, {ref, metrics})

@@ -1,9 +1,9 @@
-defmodule Vayne.Deal.Console do
+defmodule Vayne.Export.Console do
 
-  @behaviour Vayne.Task.Deal
+  @behaviour Vayne.Task.Export
   require Logger
   def run(params, metrics) do
-    Logger.info "[Mock Deal] params: #{inspect params}, metrics: #{inspect metrics}"
+    Logger.info "[Mock Export] params: #{inspect params}, metrics: #{inspect metrics}"
   end
 
 end

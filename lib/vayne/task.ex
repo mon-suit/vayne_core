@@ -14,7 +14,7 @@ defmodule Vayne.Task.Metric do
   @callback clean(stat)             :: :ok | {:error, any()}
 end
 
-defmodule Vayne.Task.Deal do
+defmodule Vayne.Task.Export do
   @type t :: %__MODULE__{module: module(), params: map()}
 
   defstruct module: nil, params: %{}
@@ -34,13 +34,13 @@ defmodule Vayne.Task do
           uniqe_key:   binary(),
           interval:    pos_integer(),
           metric_info: Metric.t,
-          deal_info:   Deal.t
+          deal_info:   Export.t
         }
 
   defstruct uniqe_key:   nil,
             interval:    nil,
             metric_info: %Vayne.Task.Metric{},
-            deal_info:   %Vayne.Task.Deal{}
+            deal_info:   %Vayne.Task.Export{}
 
   def whereis_task(%{uniqe_key: uniqe_key}), do: whereis_task(uniqe_key)
   def whereis_task(uniqe_key) when is_binary(uniqe_key) do

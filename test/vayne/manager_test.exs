@@ -21,7 +21,7 @@ defmodule Vayne.ManagerTest do
         uniqe_key:   "task-#{i}",
         interval:    10,
         metric_info: %{module: Vayne.Metric.Mock, params: nil},
-        deal_info:   %{module: Vayne.Deal.Console, params: nil}
+        deal_info:   %{module: Vayne.Export.Console, params: nil}
       }
     end)
   end

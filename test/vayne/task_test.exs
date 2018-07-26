@@ -23,12 +23,12 @@ defmodule Vayne.TaskTest do
       uniqe_key:   "normal task",
       interval:    10,
       metric_info: %{module: Vayne.Metric.Mock, params: nil},
-      deal_info:   %{module: Vayne.Deal.Mock, params: %{parent: self(), ref: ref}}
+      deal_info:   %{module: Vayne.Export.Mock, params: %{parent: self(), ref: ref}}
     }
 
     assert :ok = spawn_task(task)
 
-    assert_receive {^ref, %{"bar" => _, "baz" => _, "foo" => _}}, 5_000
+    assert_receive {^ref, %{"bar" => _, "baz" => _, "foo" => _}}, 10_000
   end
 
   test "timeout task" do
@@ -36,7 +36,7 @@ defmodule Vayne.TaskTest do
       uniqe_key:   "timeout task",
       interval:    5,
       metric_info: %{module: Vayne.Metric.MockTimeout, params: nil},
-      deal_info:   %{module: Vayne.Deal.Mock, params: %{parent: self(), ref: make_ref()}}
+      deal_info:   %{module: Vayne.Export.Mock, params: %{parent: self(), ref: make_ref()}}
     }
     assert :ok = spawn_task(task)
     Process.sleep(7_000)
@@ -50,7 +50,7 @@ defmodule Vayne.TaskTest do
       uniqe_key:   "raise error task",
       interval:    5,
       metric_info: %{module: Vayne.Metric.MockRaise, params: nil},
-      deal_info:   %{module: Vayne.Deal.Mock, params: %{parent: self(), ref: make_ref()}}
+      deal_info:   %{module: Vayne.Export.Mock, params: %{parent: self(), ref: make_ref()}}
     }
 
     assert :ok = spawn_task(task)
