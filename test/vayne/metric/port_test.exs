@@ -20,7 +20,7 @@ defmodule Vayne.Metric.PortTest do
   end
 
   test "check tcp success" do
-    {:ok, stat} = Vayne.Metric.Port.init(%{"address" => "www.google.com", "port" => 6379})
+    {:ok, stat} = Vayne.Metric.Port.init(%{"address" => "www.google.com", "port" => 80})
 
     assert {:ok, %{"remote.check.port" => 1, "remote.check.port.using" => _}}
       = Vayne.Metric.Port.run(stat, fn _msg -> :ok end)

@@ -41,7 +41,7 @@ defmodule Vayne.Manager do
     {:noreply, state}
   end
 
-  def handle_info({:nodedown, node, _info}, state) do
+  def handle_info({:nodedown, _node, _info}, state) do
     send(self(), :load_task)
     {:noreply, state}
   end

@@ -62,7 +62,7 @@ defmodule Vayne.Task do
     spec = %{id: task.uniqe_key, start: {Vayne.Task, :start_link, [group, task]}}
 
     case DynamicSupervisor.start_child(Vayne.Task.Supervisor, spec) do
-      {:ok, pid} -> :ok
+      {:ok, _pid} -> :ok
       {:error, {:already_registered, _pid}} -> :already_registered
       {:error, {:already_started, _pid}}    -> :already_registered
       {:error, reason} ->
