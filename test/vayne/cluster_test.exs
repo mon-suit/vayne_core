@@ -6,11 +6,11 @@ defmodule Vayne.ClusterTest do
 
   setup do
     nodes = Vayne.Cluster.spawn_nodes
-    [n|_] = nodes
+    #[n|_] = nodes
     :cover.start(nodes)
     on_exit "stop slave nodes", fn ->
       :cover.stop(nodes)
-      #      :rpc.call(n, Vayne.Manager, :clean_task, [:groupA])
+      #:rpc.call(n, Vayne.Manager, :clean_task, [:groupA])
       Vayne.Cluster.stop_nodes(nodes)
     end
     %{nodes: nodes}
