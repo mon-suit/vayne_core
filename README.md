@@ -10,6 +10,31 @@ Common framework for collecting and reporting metrics, with features:
 * UI dashboard to display stats: running tasks, error messages.
 * Easy to work together with monitor system you are using now. ([How to work with OpenFalcon](How-to-work-with-openfalcon.md))
 
+```
++---------+
+|  Http   |
++---------+                            |
+                                       |
++---------+                            |  load monitor task
+|  Mysql  |                            v
++---------+                 +----------------------+
+                            |   +----------+       |            +----------+
++---------+                 |   |   vayne  |       |            |OpenFalcon|
+| Mongodb |                 |   +----------+       |            +----------+
++---------+     Collect     |        .             |   Export
+             +----------->  |        .             | +--------->
++---------+     Metrics     |   +----------+       |
+|Memcached|                 |   |   vayne  |       |            +----------+
++---------+                 |   +----------+       |            | Console  |
+                            |               Cluster|            +----------+
++---------+                 +----------------------+
+|  Redis  |
++---------+
+
++---------+
+|  Other..|
++---------+
+```
 
 ### Plugin
 
